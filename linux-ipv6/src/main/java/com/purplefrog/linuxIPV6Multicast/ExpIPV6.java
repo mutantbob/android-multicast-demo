@@ -1,4 +1,5 @@
-package com.ericsson.ttv.bobtv.upnp;
+package com.purplefrog.linuxIPV6Multicast;
+
 
 import java.io.*;
 import java.net.*;
