@@ -46,7 +46,8 @@ public class ExpIPV6
             new Thread(r, "multicast receive loop").start();
         }
 
-
+        System.out.println("multicast = "+ssdpSiteLocalV6().getHostAddress()+" : "+port + "\n" +
+            "Type in a payload and hit [ENTER] to transmit");
         copyStdinToMulticast();
     }
 
@@ -87,9 +88,9 @@ public class ExpIPV6
             server.receive(pkt);
 
             InetAddress addr = pkt.getAddress();
-            System.out.println(addr.getHostAddress());
+            System.out.println("RECEIVED from "+addr.getHostAddress());
 
-            System.out.println(new String(pkt.getData(), 0, pkt.getLength(), utf8));
+            System.out.println("\""+new String(pkt.getData(), 0, pkt.getLength(), utf8)+"\"");
         }
     }
 }
