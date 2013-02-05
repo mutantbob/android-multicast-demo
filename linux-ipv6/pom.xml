@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.purplefrog</groupId>
+  <artifactId>linuxIPV6Multicast</artifactId>
+  <packaging>jar</packaging>
+  <version>0.9-SNAPSHOT</version>
+  <name>a simple java app that prints out multicast packets it receives and transmits multicast payloads it reads from stdin</name>
+
+  <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.5</source>
+                <target>1.5</target>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>appassembler-maven-plugin</artifactId>
+            <!-- We bind to the package phase to automatically create the bin scripts for every simulator -->
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>assemble</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <extraJvmArguments>
+                </extraJvmArguments>
+                <programs>
+                    <program>
+                        <mainClass>com.purplefrog.linuxIPV6Multicast.ExpIPV6</mainClass>
+                        <name>expIPV6</name>
+                    </program>
+
+                </programs>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>attached</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <descriptors>
+                    <descriptor>src/assembly/dist.xml</descriptor>
+                </descriptors>
+            </configuration>
+        </plugin>
+
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav</artifactId>
+        <version>1.0-beta-2</version>
+      </extension>
+    </extensions>
+
+  </build>
+
+
+  <dependencies>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+
+
+</project>
