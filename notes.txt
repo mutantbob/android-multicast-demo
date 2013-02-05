@@ -1,0 +1,11 @@
+( cd multicastExp
+  ant debug
+  adb install -r bin/multicastExp-debug.apk
+
+  adb shell 'am start -n "com.purplefrog.multicastExp/com.purplefrog.multicastExp.MainActivity"'
+)
+
+(cd linux-ipv6
+    mvn package
+    sh target/appassembler/bin/expIPV6
+)
